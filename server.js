@@ -21,7 +21,7 @@ let app = express();
 app.use(express.static(initialPath));
 
 // usando um methodo app no json,habilitando os dados do formulario compartilhado
-app.use(express.json);
+app.use(express.json());
 
 //Adicionando uma rota inicial, resposta e enviar arqu,via index.html 
 app.get('/',(req,res) =>{
@@ -29,7 +29,7 @@ app.get('/',(req,res) =>{
 })
 
 // Solicitaçãode postagem para enviar o email
-app.post('/mail',(req,res));{
+app.post('/mail', (req,res)=> {
     const{firstname, lastname, email, msg}= req.body;
     const transporter = nodemailer.createTransport({
         service:'gmail',
@@ -38,28 +38,28 @@ app.post('/mail',(req,res));{
             pass:process.env.PASSWORD
         }
     })
-}
+
 
 //Estrutura do email.
-const mailOptions={
+    const mailOptions={
     from: 'enter sender email here',
     to: 'enter reciever email here',
     subject:'Portfólio',
     text:`First name: ${firstname}, \nLast name: ${lastname}, \nEmail:${email}, \nMessage: ${msg}`
-} 
+    } 
 
 // Utilizando o methodo transporte para solicitar o envio Email e verificando se tem algum erro
-transporter.sendMail(mailOptions,(err,result)=>{
+    transporter.sendMail(mailOptions,(err,result)=>{
     if(err){
         console.log(err);
         res.json('opss! it seems like some error occured plz.try again.')
     } else{
         res.json('thanks for e-mailing me.I will reply to you within 2 working days')
     }
-    }
-)
+    })
+})
 // configurando a porta
-app.listen('3000',() =>{
+    app.listen('3000',() =>{
     console.log('listening....')
 })
 

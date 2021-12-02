@@ -1,5 +1,13 @@
+// toggle
+const toggleBtn =document.querySelector('.toggle-btn');
+const linkContainer = document.querySelector('.link-container');
+// função de efeito no .nav responsivo.
+toggleBtn.addEventListener('click',()=>{
+    toggleBtn.classList.toggle('active');
+    linkContainer.classList.toggle('show');
+})
 
-
+// Links
 // alterando a classe .active em .links
  const links= document.querySelectorAll(".link");
 //  metodo para percorrer os docs do .link e remover o .active da pagina anterior,adicionando o .active no .link clickado
@@ -47,25 +55,25 @@ filters.forEach(filterBtn =>{
 
 // Contact form
 const contactBtn = document.querySelector('.contact-btn');
-const firstName = document.querySelector('.first-name');
-const lastName = document.querySelector('.last-name');
+const firstname = document.querySelector('.first-name');
+const lastname = document.querySelector('.last-name');
 const email = document.querySelector('.email');
 const msg = document.querySelector('.message');
 
 contactBtn.addEventListener('click',() => {
-    if(firstName.value.length && lastName.value.length && email.value.length && msg.value.length){
+    if(firstname.value.length && lastname.value.length && email.value.length && msg.value.length){
         fetch('/mail', {
             method:'post',
             headers: new Headers({'Content-Type':'application/json'}),
             body: JSON.stringify({
-                firstName: firstName.value,
-                lastName:lastName.value,
+                firstName: firstname.value,
+                lastName:lastname.value,
                 email: email.value,
                 msg:msg.value,
             })
         })
-        .then(res=> res.json())
-        .then(data=>{
+        .then(res => res.json())
+        .then(data => {
             alert(data);
         })
         
